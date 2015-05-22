@@ -58,10 +58,18 @@ var setNewExtent = function (overviewDiv) {
    map.getView().setResolution(c);
 };
 
-$(".ol-overviewmap-box").draggable();
-$(".ol-overviewmap-box").on("dragstop", function (event, ui) {
-   setNewExtent(ui);
-   /* After drag the box left and top are off */
-  $(".ol-overviewmap-box").css("left", "auto");
-  $(".ol-overviewmap-box").css("top", "auto");
+$(document).ready(function (e) {
+
+$.getScript("http://code.jquery.com/ui/1.11.3/jquery-ui.min.js", function(data, textStatus, jqxhr) {
+	if (jqxhr.status===200) {
+		$(".ol-overviewmap-box").draggable({drag: function (event, ui) {  }});
+		$(".ol-overviewmap-box").on("dragstop", function (event, ui) {
+		   setNewExtent(ui);
+		   /* After drag the box left and top are off */
+		  $(".ol-overviewmap-box").css("left", "auto");
+		  $(".ol-overviewmap-box").css("top", "auto");
+		});
+	}
+});
+
 });
